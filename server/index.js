@@ -16,8 +16,26 @@ const PORT = process.env.PORT;
 
 
 const corsOption = {
-    origin: [process.env.CLIENT_URL, 'https://livemetting-ppx9081bv-anisur-rohamn-rohamns-projects.vercel.app'],
-    credentials:true,
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        // Allow localhost for development
+        if (origin.includes('localhost')) return callback(null, true);
+        
+        // Allow all vercel.app domains
+        if (origin.endsWith('.vercel.app') || origin === 'https://livemetting.vercel.app') {
+            return callback(null, true);
+        }
+        
+        // Allow CLIENT_URL from env
+        if (origin === process.env.CLIENT_URL) {
+            return callback(null, true);
+        }
+        
+        callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
