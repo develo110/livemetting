@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 
 
 const corsOption = {
-    origin: [process.env.CLIENT_URL, 'https://livemetting.vercel.app'],
+    origin: [process.env.CLIENT_URL, 'https://livemetting-ppx9081bv-anisur-rohamn-rohamns-projects.vercel.app'],
     credentials:true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
