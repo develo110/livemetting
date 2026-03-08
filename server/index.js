@@ -24,7 +24,7 @@ const corsOption = {
         if (origin.includes('localhost')) return callback(null, true);
         
         // Allow all vercel.app domains
-        if (origin.endsWith('.vercel.app') || origin === 'https://livemetting.vercel.app') {
+        if (origin.endsWith('.vercel.app') || origin === 'https://livemetting-ppx9081bv-anisur-rohamn-rohamns-projects.vercel.app') {
             return callback(null, true);
         }
         
