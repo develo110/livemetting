@@ -16,11 +16,11 @@ const PORT = process.env.PORT;
 
 
 const corsOption = {
-    origin: process.env.CLIENT_URL,
-    credentials:true
+    origin: [process.env.CLIENT_URL, 'https://livemetting.vercel.app'],
+    credentials:true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }
-
-connectDb();
 
 app.use(cors(corsOption));
 app.use(express.json())
@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended:true}))
 app.get('/api/health', (req,res) => {
     res.json({
         status: 'OK',
-        message:'Live class server is running',
+        message:'Live meeting server is running',
         timestamp:new Date().toISOString()
     })
 })
@@ -43,3 +43,5 @@ app.use(errorHandler)
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
+
+connectDb();

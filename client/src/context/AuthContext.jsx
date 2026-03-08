@@ -43,6 +43,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
+      
+      if (!response || !response.data) {
+        throw new Error('Invalid response from server');
+      }
+      
       const { user, token } = response.data.data;
       //set token to localstorage
       localStorage.setItem("token", token);
@@ -52,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true, user };
     } catch (error) {
-      const errorMessage = error.response.data?.error || "Registration failed";
+      const errorMessage = error.response?.data?.error || error.message || "Registration failed";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -68,6 +73,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       });
+      
+      if (!response || !response.data) {
+        throw new Error('Invalid response from server');
+      }
+      
       const { user, token } = response.data.data;
       //set token to localstorage
       localStorage.setItem("token", token);
@@ -77,7 +87,7 @@ export const AuthProvider = ({ children }) => {
 
       return { success: true, user };
     } catch (error) {
-      const errorMessage = error.response.data?.error || "Login failed";
+      const errorMessage = error.response?.data?.error || error.message || "Login failed";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
